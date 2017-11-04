@@ -1,14 +1,21 @@
 function [ri,ci] = trilinds(nn,k)
-%  [ri,ci] = trilinds(nn)
-%  [ri,ci] = trilinds(nn,k)
+%  trilinds(nn,k) - extract row and column indices of lower triangular elements of a matrix
+%  of size nn (default k=0 if not provided)
 %
-%  trilinds(nn) - extract row and column indices of lower triangular elements of a matrix
-%  of size nn.
+%  Inputs:
+%   nn - sidelength of square matrix
+%    k - which diagonal to start at (0 = main diagonal) (OPTIONAL).
 %
-%  trilinds(nn,k) - use only indices of the kth diagonal and below (central diag = 0)
+%  Outputs:
+%   ii - indices of entries of lower triangle (from 1 to nn^2).
+%   [ri,ci] - row and column indices of lower triangle
 
-if nargin == 1
-    [ri,ci] = find(triu(ones(nn)));
+if nargin < 2
+    k = 0;
+end
+
+if nargout == 1
+    ri = find(tril(ones(nn),k));
 else
-    [ri,ci] = find(triu(ones(nn),k));
+    [ri,ci] = find(tril(ones(nn),k));
 end

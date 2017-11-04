@@ -1,7 +1,7 @@
-function [B,wvec] = realnufftbasis(tvec,T,N)
+function [B,wvec,wcos,wsin] = realnufftbasis(tvec,T,N)
 % Real basis for non-uniform discrete fourier transform 
 %
-% [B,wvec] = realnufftbasis(tvec,T,maxw)
+% [B,wvec] = realnufftbasis(tvec,T,N)
 %
 % Makes basis of sines and cosines B for a function sampled at nonuniform
 % time points in tvec, with a circular boundary on [0, T], and spacing of
@@ -11,15 +11,13 @@ function [B,wvec] = realnufftbasis(tvec,T,N)
 %
 % INPUTS:
 %  tvec [nt x 1] - column vector of non-uniform time points for signal 
-%    dt  [1 x 1] - spacing of effective DFT lattice in time
 %     T  [1 x 1] - circular boundary for function in time 
-%  maxw  [1 x 1] - absolute value of maximum frequency to use (OPTIONAL)
+%     N  [1 x 1] - number of Fourier frequencies to use
 %
 % OUTPUTS:
 %      B [ni x N] - basis matrix for mapping Fourier representation to real
 %                   points on lattice of points in tvec.
 %    wvec [N x 1] - DFT frequencies associated with columns of B
-%       N [1 x 1] - ceil(T/dT), number of Fourier frequencies in full matrix (if desired)
 %   
 % See also: realfft, realifft
 
@@ -28,7 +26,7 @@ if size(tvec,1) == 1
     tvec = tvec';
 end
 
-if max(tvec)>T
+if max(tvec+1e-6)>T
     error('max(tvec) greater than circular boundary T!');
 end
 
