@@ -1,25 +1,24 @@
 function [ri,ci] = triuinds(nn,k)
-%  [ri,ci] = triuinds(nn)
+%  [ii] = triuinds(nn,k)
 %  [ri,ci] = triuinds(nn,k)
 %
-%  triuinds(nn) - extract row and column indices of upper triangular elements of a matrix
-%  of size nn.
+%  triuinds(nn,k) - extract row and column indices of upper triangular elements of a matrix
+%  of size nn (default k=0 if not provided)
 %
-%  triuinds(nn,k) - use only indices of the kth diagonal and above (middle diag = 0)
+%  Inputs:
+%   nn - sidelength of square matrix
+%    k - which diagonal to start at (0 = main diagonal) (OPTIONAL).
+%
+%  Outputs:
+%   ii - indices of entries of upper triangle (from 1 to nn^2).
+%   [ri,ci] - row and column indices of upper triangle
+
+if nargin == 1
+    k = 0;
+end
 
 if nargout == 1
-    if nargin == 1
-        ri = find(triu(ones(nn)));
-    else
-        ri = find(triu(ones(nn),k));
-    end
-    
+    ri = find(triu(ones(nn),k));
 else
-    
-    if nargin == 1
-        [ri,ci] = find(triu(ones(nn)));
-    else
-        [ri,ci] = find(triu(ones(nn),k));
-    end
-
+    [ri,ci] = find(triu(ones(nn),k));
 end

@@ -19,6 +19,13 @@ function [xval,inds,yval] = argmin(yy,varargin)
 
 ysize = size(yy);  % get dimensions of yy
 
+% Create indices as needed
+if nargin == 1
+  for jj = 1:length(ysize)
+	     varargin{jj} = (1:ysize(jj))';
+    end
+end
+
 % Check if it's a vector
 if (ysize(1)==1) || (ysize(2) == 1)
     ysize = length(ysize);
