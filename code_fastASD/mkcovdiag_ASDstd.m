@@ -1,4 +1,4 @@
-function [cdiag,dcinvdthet,dcdthet,ddcinvdthet] = mkcovdiag_dualASDstd(len,trho,wwnrm)
+function [cdiag,dcinvdthet,dcdthet,ddcinvdthet] = mkcovdiag_ASDstd(len,trho,wwnrm)
 % Eigenvalues of ASD covariance (as diagonalized in Fourier domain)
 %
 % [cdiag,dcinvdthet,dcdthet,ddcinvdthet] = mkcovdiag_ASDstd(trhos,lens,wwnrm)
